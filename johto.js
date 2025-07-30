@@ -5,28 +5,28 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 318,
             name: 'Carvanha',
-            image: 'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/318.png',
+            image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/318.png',
             types: ['water', 'dark']
 
         },
         {
             id: 319,
             name: 'Sharpedo',
-            image: 'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/319.png',
+             image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/319.png',
             types: ['water', 'dark']
 
         },
         {
             id: 320,
             name: 'Wailmer',
-            image: 'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/320.png',
+            image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/320.png',
             types: ['water']
 
         },
         {
             id: 333,
             name: 'Swablu',
-            image: 'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/333.png',
+            image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/333.png',
             types: ['normal, fly']
 
         },
