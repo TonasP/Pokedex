@@ -43,7 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Mewtwo',
             image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png',
             types: ['psychic']
-        }
+        },
+        {
+            id: 111,
+            name: 'Rhyhorn',
+            image: 'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/111.png',
+            types: ['Ground',	'Rock']
+        },
+        {
+            id: 111,
+            name: 'Rhyhorn',
+            image: 'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/111.png',
+            types: ['Ground',	'Rock']
+        },
     ];
 
     const createPokemonCard = (pokemon) => {
