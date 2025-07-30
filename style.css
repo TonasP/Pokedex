@@ -22,6 +22,27 @@ header h1 {
     font-size: 2.5em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+.regions{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    padding: 1% 0 0 0;
+    gap:8%
+}
+.regions__content{
+    text-decoration: none;
+    color: #333;
+    border: #cc0000 dotted 3px;
+    background-color: #DEF3FD;
+    border-radius: 15px;    
+    padding: 1%;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+.regions__content:hover{
+    border: #cc0000 solid 3px;
+    transform: translateY(-10px) scale(1.03) ;
+
+}
 
 .pokedex-container {
     display: flex;
