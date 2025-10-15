@@ -7,8 +7,6 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
-    # Add this block to grant the necessary permissions
     permissions:
       contents: read
       packages: write
@@ -27,20 +25,20 @@ jobs:
       - name: Build and Push Docker image
         run: |
           OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          docker build -t ghcr.io/$OWNER_LC/pokedex:latest .
-          docker push ghcr.io/$OWNER_LC/pokedex:latest
+          IMAGE_ID="ghcr.io/$OWNER_LC/pokedex:latest"
+          docker build -t $IMAGE_ID .
+          docker push $IMAGE_ID
 
-      # --- NOVO PASSO DE TESTE ADICIONADO AQUI ---
       - name: Run and test container
         run: |
-          echo "Testando a imagem ${{ steps.build_and_push.outputs.IMAGE_ID }}"
-          # Executa o contêiner em segundo plano (-d) e mapeia a porta
-          docker run -d -p 3000:3000 --name test-container ${{ steps.build_and_push.outputs.IMAGE_ID }}
+          OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_ID="ghcr.io/$OWNER_LC/pokedex:latest"
           
-          # Espera alguns segundos para a aplicação iniciar
+          echo "Testando a imagem $IMAGE_ID"
+          docker run -d -p 3000:3000 --name test-container $IMAGE_ID
+          
           echo "Aguardando a aplicação iniciar..."
           sleep 5
           
-          # Testa se a aplicação está respondendo corretamente na porta 3000
           echo "Verificando a resposta da aplicação..."
-          curl http://localhost:3000 | grep "Minha aplicação Docker está funcionando!"    
+          curl http://localhost:3000 | grep "Minha aplicação Docker está funcionando!"
