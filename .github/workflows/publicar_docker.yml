@@ -40,5 +40,9 @@ jobs:
           echo "Aguardando a aplicação iniciar..."
           sleep 5
           
+          # Adicione este comando para ver os logs do container
+          echo "Exibindo logs do container..."
+          docker logs test-container
+          
           echo "Verificando a resposta da aplicação..."
           curl http://localhost:3000 | grep "Minha aplicação Docker está funcionando!"
