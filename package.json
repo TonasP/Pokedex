@@ -1,0 +1,19 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Site baseado em HTML, CSS e Javascript para a construção de uma Pokedex simples",
+  "main": "johto.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonasP/Pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonasP/Pokedex/issues"
+  },
+  "homepage": "https://github.com/TonasP/Pokedex#readme"
+}
