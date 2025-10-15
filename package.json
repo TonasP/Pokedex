@@ -1,19 +1,12 @@
 {
-  "name": "pokedex",
+  "name": "minha-app-docker",
   "version": "1.0.0",
-  "description": "Site baseado em HTML, CSS e Javascript para a construção de uma Pokedex simples",
-  "main": "johto.js",
+  "description": "App de exemplo para o workflow do GHCR",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TonasP/Pokedex.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TonasP/Pokedex/issues"
-  },
-  "homepage": "https://github.com/TonasP/Pokedex#readme"
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
