@@ -7,6 +7,12 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    
+    # Add this block to grant the necessary permissions
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -18,12 +24,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Passo combinado para construir e publicar a imagem
       - name: Build and Push Docker image
         run: |
-          # Pega o nome do proprietário do repositório (seu usuário) e converte para minúsculas
           OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          
-          # Usa a variável com o nome em minúsculas para construir e publicar
           docker build -t ghcr.io/$OWNER_LC/pokedex:latest .
           docker push ghcr.io/$OWNER_LC/pokedex:latest
