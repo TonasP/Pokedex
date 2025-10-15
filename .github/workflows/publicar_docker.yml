@@ -29,3 +29,18 @@ jobs:
           OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           docker build -t ghcr.io/$OWNER_LC/pokedex:latest .
           docker push ghcr.io/$OWNER_LC/pokedex:latest
+
+      # --- NOVO PASSO DE TESTE ADICIONADO AQUI ---
+      - name: Run and test container
+        run: |
+          echo "Testando a imagem ${{ steps.build_and_push.outputs.IMAGE_ID }}"
+          # Executa o contêiner em segundo plano (-d) e mapeia a porta
+          docker run -d -p 3000:3000 --name test-container ${{ steps.build_and_push.outputs.IMAGE_ID }}
+          
+          # Espera alguns segundos para a aplicação iniciar
+          echo "Aguardando a aplicação iniciar..."
+          sleep 5
+          
+          # Testa se a aplicação está respondendo corretamente na porta 3000
+          echo "Verificando a resposta da aplicação..."
+          curl http://localhost:3000 | grep "Minha aplicação Docker está funcionando!"    
