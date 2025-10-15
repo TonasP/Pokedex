@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+  create:
+    tags:
+      - 'v*'
 
 jobs:
   build-and-push:
@@ -22,27 +25,28 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push Docker image
-        run: |
-          OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_ID="ghcr.io/$OWNER_LC/pokedex:latest"
-          docker build -t $IMAGE_ID .
-          docker push $IMAGE_ID
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/pokedex
 
-      - name: Run and test container
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      # --- NOVOS PASSOS PARA SALVAR E FAZER UPLOAD DA IMAGEM ---
+      - name: Save Docker image to a file
         run: |
-          OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_ID="ghcr.io/$OWNER_LC/pokedex:latest"
-          
-          echo "Testando a imagem $IMAGE_ID"
-          docker run -d -p 3000:3000 --name test-container $IMAGE_ID
-          
-          echo "Aguardando a aplicação iniciar..."
-          sleep 5
-          
-          # Adicione este comando para ver os logs do container
-          echo "Exibindo logs do container..."
-          docker logs test-container
-          
-          echo "Verificando a resposta da aplicação..."
-          curl http://localhost:3000 | grep "Minha aplicação Docker está funcionando!"
+          echo "Salvando a imagem em pokedex-image.tar..."
+          docker save -o pokedex-image.tar ${{ steps.meta.outputs.tags }}
+      
+      - name: Upload image as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokedex-docker-image
+          path: pokedex-image.tar
